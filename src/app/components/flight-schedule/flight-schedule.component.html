@@ -1,0 +1,32 @@
+<div *ngIf="source">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+      <!-- Position Column -->
+      <ng-container matColumnDef="flight_number">
+        <th mat-header-cell *matHeaderCellDef>Flight</th>
+        <td mat-cell *matCellDef="let element">{{element.flight_number}}</td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="departure_city">
+        <th mat-header-cell *matHeaderCellDef>Departure</th>
+        <td mat-cell *matCellDef="let element">{{element.departure_city}}</td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="arrival_city">
+        <th mat-header-cell *matHeaderCellDef>Arrival</th>
+        <td mat-cell *matCellDef="let element">{{element.arrival_city}}</td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="day">
+        <th mat-header-cell *matHeaderCellDef>View Flight</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button color="primary" (click)="expandFlightDetails(element.flight_number)">View Flight</button>
+        </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

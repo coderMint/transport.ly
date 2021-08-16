@@ -1,7 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
-import { DataServiceService } from './services/data-service.service';
+import { Component } from '@angular/core';
 import { FlightElement } from './model/flight';
+import { DataServiceService } from './services/data-service.service';
 
 /**
  * @title Fetching flight data from a json file
@@ -15,24 +14,18 @@ import { FlightElement } from './model/flight';
 
 export class AppComponent {
 
-  displayedColumns: string[] = ['flight_number', 'departure_city', 'arrival_city', 'day'];
-  dataSource: any[] = [];
+  constructor(private data: DataServiceService) {}
 
   ELEMENT_DATA: FlightElement[] = [];
-
-  @ViewChild(MatTable) table: MatTable<FlightElement> | any;
-
-  constructor(private data: DataServiceService) {}
+  source_one: FlightElement[] = [];
+  source_two: FlightElement[] = [];
 
   ngOnInit(): void {
     this.data.getFlightData().subscribe((_flightData: FlightElement[]) => {
       this.ELEMENT_DATA = _flightData;
-      this.dataSource = this.ELEMENT_DATA;
-      console.warn(this.ELEMENT_DATA);
+      this.source_one = this.ELEMENT_DATA.filter((flightSchedule: FlightElement) => flightSchedule.day == 1);
+      this.source_two = this.ELEMENT_DATA.filter((flightSchedule: FlightElement) => flightSchedule.day == 2);
     });
   }
 
-  expandFlightDetails(flightNumber: number): void {
-    console.warn('flight #', flightNumber);
-  }
 }
