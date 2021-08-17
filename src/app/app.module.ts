@@ -10,11 +10,13 @@ import {MatButtonModule} from '@angular/material/button';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FlightScheduleComponent } from './components/flight-schedule/flight-schedule.component';
+import { OrderScheduleComponent } from './components/order-schedule/order-schedule.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FlightScheduleComponent
+    FlightScheduleComponent,
+    OrderScheduleComponent
   ],
   imports: [
     BrowserModule,

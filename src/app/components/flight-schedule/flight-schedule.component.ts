@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, Input } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { FlightElement } from 'src/app/model/flight';
 
@@ -7,7 +7,7 @@ import { FlightElement } from 'src/app/model/flight';
   templateUrl: './flight-schedule.component.html',
   styleUrls: ['./flight-schedule.component.scss']
 })
-export class FlightScheduleComponent implements OnInit {
+export class FlightScheduleComponent {
 
   @Input() source: FlightElement[] = [];
   @ViewChild(MatTable) table: MatTable<FlightElement> | any;
@@ -17,10 +17,7 @@ export class FlightScheduleComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void{}
-
   ngOnChanges(): void {
-    console.warn('in component', this.source);
     this.dataSource = this.source;
   }
 

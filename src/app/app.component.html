@@ -3,17 +3,30 @@
   <span style="margin: 1rem;">an automated air freight scheduling service</span>
   <button mat-raised-button 
     color="primary"
-    style="align-self: baseline;">
-    View order schedule
+    style="align-self: baseline;"
+    (click)="toggleOrderSchedule()">
+    {{button_literature}}
   </button>
 </div>
 
-<div class="scheduled-flights">
-  <h3>Scheduled flights for day 1</h3>
-  <flight-schedule [source]="source_one"></flight-schedule>
-</div>
+<!-- flight schedule -->
+<ng-container *ngIf="flightScheduleActive">
+  <div class="scheduled-flights">
+    <h3>Scheduled flights for day 1</h3>
+    <flight-schedule [source]="source_one"></flight-schedule>
+  </div>
 
-<div class="scheduled-flights">
-  <h3>Scheduled flights for day 2</h3>
-  <flight-schedule [source]="source_two"></flight-schedule>
-</div>
+  <div class="scheduled-flights">
+    <h3>Scheduled flights for day 2</h3>
+    <flight-schedule [source]="source_two"></flight-schedule>
+  </div>
+</ng-container>
+
+<!-- order schedule -->
+<ng-container *ngIf="!flightScheduleActive">
+  <div class="scheduled-orders">
+    <h3>Orders</h3>
+    <order-schedule [source]="ORDER_DATA"></order-schedule>
+  </div>
+</ng-container>
+
