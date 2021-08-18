@@ -13,12 +13,12 @@
 <ng-container *ngIf="flightScheduleActive">
   <div class="scheduled-flights">
     <h3>Scheduled flights for day 1</h3>
-    <flight-schedule [source]="source_one"></flight-schedule>
+    <flight-schedule [source]="source_one" (orderSpecificToFlightEvent)="renderOrdersForSpecificFlight($event)"></flight-schedule>
   </div>
 
   <div class="scheduled-flights">
     <h3>Scheduled flights for day 2</h3>
-    <flight-schedule [source]="source_two"></flight-schedule>
+    <flight-schedule [source]="source_two" (orderSpecificToFlightEvent)="renderOrdersForSpecificFlight($event)"></flight-schedule>
   </div>
 </ng-container>
 

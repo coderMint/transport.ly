@@ -18,7 +18,7 @@ export class AppComponent {
   constructor(private data: DataServiceService) {}
 
   FLIGHT_DATA: FlightElement[] = [];
-  ORDER_DATA: any[] = [];
+  ORDER_DATA: OrderElement[] = [];
 
   source_one: FlightElement[] = [];
   source_two: FlightElement[] = [];
@@ -35,37 +35,27 @@ export class AppComponent {
     });
 
     // generate normalized order data for the orders table
-    this.ORDER_DATA = this.data.normalizeOrderDataAndAssignFlightPerOrder();
-    console.warn('app component', this.ORDER_DATA);
-  }
-
-  ngOnChanges(): void {
-    // this.data.normalizeOrderDataAndAssignFlightPerOrder().subscribe((result: OrderElement[]) => {
-    //   console.warn(result);
-    //   this.ORDER_DATA = result;
-    // });
+    this.data.normalizeOrderDataAndAssignFlightPerOrder().subscribe(() => {
+      this.ORDER_DATA = this.data.ORDER_DATA;
+      console.warn('app component', this.ORDER_DATA); 
+    });
   }
 
   toggleOrderSchedule(): void {
     this.flightScheduleActive = !this.flightScheduleActive;
     
     if (this.flightScheduleActive == true) {
+      // resetting to original/full order data
+      this.ORDER_DATA = this.data.ORDER_DATA;
       this.button_literature = 'View order schedule';
     } else {
       this.button_literature = 'View flight schedule';
     }
   }
 
+  renderOrdersForSpecificFlight($orders: OrderElement[]): void {
+    this.ORDER_DATA = $orders;
+    this.toggleOrderSchedule();
+  }
+
 }
-
-
-
-// for (var i = 0; i <= this.ORDER_DATA.length; i++) {
-    //   for (let flightCapacity = 1; flightCapacity <= 20; flightCapacity++) {
-    //     if (this.ORDER_DATA[flightCapacity].order.order.destination === )
-    //   }
-    // }
-
-    // this.ORDER_DATA.forEach((order: OrderElement, index) => {
-    //   for ()
-    // });
